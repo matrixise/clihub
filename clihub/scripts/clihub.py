@@ -23,7 +23,6 @@ from ..release import version
 
 def main():
     arguments = docopt(__doc__, version=version)
-    print arguments
     if arguments.get('login'):
         return Account.save_to_config(arguments.get('<username>'),
                                       arguments.get('<password>'))
