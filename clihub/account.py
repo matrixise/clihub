@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import imp
+from contextlib import contextmanager
 
 
 class Account(object):
@@ -9,13 +10,14 @@ class Account(object):
         self.password = password
 
     @classmethod
+    @contextmanager
     def load_from_config(cls):
         config_file = cls.config_file()
         d = imp.new_module('config')
         d.__file__ = config_file
         try:
             execfile(config_file, d.__dict__)
-            return Account(d.username, d.password)
+            yield Account(d.username, d.password)
         except IOError, e:
             e.strerror = 'Unable to load configuration file (%s)' % e.strerror
             raise
