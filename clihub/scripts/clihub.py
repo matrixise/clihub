@@ -6,7 +6,7 @@
 Usage:
     clihub login <username> <password>
     clihub logout
-    clihub repo new <name> [--wiki] [--issue]
+    clihub repo new <name> [--no-wiki] [--no-issues]
     clihub repo delete <name>
 
 Options:
@@ -23,7 +23,7 @@ from ..release import version
 
 def main():
     arguments = docopt(__doc__, version=version)
-    print arguments
+    #print arguments
     if arguments.get('login'):
         return Account.save_to_config(arguments.get('<username>'),
                                       arguments.get('<password>'))
@@ -37,7 +37,9 @@ def main():
             print "There is no config file"
             sys.exit(1)
         if arguments.get('new'):
-            Repository.create(account, arguments.get('<name>'))
+            has_issues = not arguments.get('--no-issues')
+            has_wiki = not arguments.get('--no-wiki')
+            Repository.create(account, arguments.get('<name>'), has_issues=has_issues, has_wiki=has_wiki)
         if arguments.get('delete'):
             Repository(account, arguments.get('<name>')).delete()
 
