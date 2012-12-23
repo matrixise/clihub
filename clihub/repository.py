@@ -12,13 +12,13 @@ import json
 
 class Repository(object):
     @classmethod
-    def create(cls, account, repository_name):
+    def create(cls, account, repository_name, has_issues=True, has_wiki=True):
         values = {
             "name": repository_name,
             "private": False,
-            "has_issues": True,
-            "has_wiki": True,
-            "has_downloads": False
+            "has_issues": has_issues,
+            "has_wiki": has_wiki,
+            "has_downloads": False      # XXX deprecated: https://github.com/blog/1302-goodbye-uploads
         }
         url = 'https://api.github.com/user/repos'
 
