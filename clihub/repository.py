@@ -27,6 +27,8 @@ class Repository(object):
                               data=json.dumps(values))
 
         if query.status_code == 201:
+            print query.json()['ssh_url']
+
             return Repository(account, repository_name)
         else:
             raise Exception("Can't create the repository")
