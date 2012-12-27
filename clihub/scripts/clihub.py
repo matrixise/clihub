@@ -8,6 +8,7 @@ Usage:
     clihub repo delete <name>
     clihub gist new [--description=DESCRIPTION] [--private] FILES...
     clihub gist delete <name>
+    clihub issue new <repository> <title> [--description=DESCRIPTION]
 
 Options:
     -h, --help      Show this screen
@@ -18,6 +19,7 @@ from docopt import docopt
 from ..account import Account
 from ..repository import Repository
 from ..gist import Gist
+from ..issue import Issue
 from ..release import version
 
 
@@ -52,6 +54,11 @@ def main():
                 print gist
             if arguments.get('delete'):
                 Gist.delete(account, arguments.get('<name>'))
+
+    if arguments.get('issue'):
+        with Account.load_from_config() as account:
+            if arguments.get('new'):
+                Issue.create(account, arguments.get('<repository>'), arguments.get('<title>'), arguments.get('--description'))
 
 if __name__ == '__main__':
     main()
