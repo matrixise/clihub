@@ -32,7 +32,7 @@ class Gist(object):
                               data=json.dumps(values))
 
         if query.status_code == 201:
-            return query.json()['url']
+            return query.json()['html_url']
 
     @classmethod
     def delete(cls, account, gist_id):
