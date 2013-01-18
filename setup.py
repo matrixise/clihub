@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-CliHub
+clihub
 ------
 
-CliHub is a tool to interact with the APIv3 of GitHUB.
+clihub is a tool to interact with the APIv3 of GitHUB.
 
 """
 from setuptools import setup
