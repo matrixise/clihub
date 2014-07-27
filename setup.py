@@ -16,6 +16,7 @@ setup(
     name=release.name,
     version=release.version,
     url='http://github.com/matrixise/clihub',
+    description='clihub',
     author='Stephane Wirtel',
     author_email='stephane@wirtel.be',
     install_requires=[
